@@ -1,0 +1,27 @@
+/**
+	Style various elements appropriately.
+	Version: 11:50PM AST 1/31/2020
+*/
+
+/* 
+	Reset all elements back to a default across all browsers.
+	http://meyerweb.com/eric/tools/css/reset/ 
+	v2.0 | 20110126
+	License: none (public domain)
+*/
+
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+  }
+  
+  #canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	touch-action: none;
+  }
