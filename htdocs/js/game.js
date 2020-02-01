@@ -63,7 +63,10 @@ function createScene(canvas, engine) {
 
     BABYLON.SceneLoader.ImportMesh(null, "/assets/models/", "GameJamRooms.obj", scene, function (meshes, particleSystems, skeletons) {
         meshes[0].checkCollisions = true;
-	});
+    });
+
+    var radio_music = new BABYLON.Sound('radio_music', '/assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
+    }, { loop: false, autoplay: false });
 
 	return scene;
 };
