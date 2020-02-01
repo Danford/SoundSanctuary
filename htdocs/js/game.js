@@ -2,6 +2,11 @@
 	Responsible for pulling everything together and the core game logic.
 */
 
+/// Storage for settings
+var config = {
+    character_height: 180
+};
+
  /**
 	Init the scene and assets for render.
 	@param HTMLElement canvas The <canvas> element that we should render to.
@@ -16,10 +21,10 @@ function createScene(canvas, engine) {
 	canvas.style.height = '100%';
 
 	// Add a camera to the scene and attach it to the canvas
-	var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 0, -10), scene);
+	var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, config.character_height, 0), scene);
 
 	// Targets the camera to a particular position. In this case the scene origin
-	camera.setTarget(BABYLON.Vector3.Zero());
+	camera.setTarget(new BABYLON.Vector3(1, config.character_height, 0));
 
 	// Attach the camera to the canvas
 	camera.attachControl(canvas, true);
@@ -29,9 +34,14 @@ function createScene(canvas, engine) {
 	var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
 
 	// Add and manipulate meshes in the scene
-	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
+	/*var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
+	sphere.position = new BABYLON.Vector3(0, 1, 0); // Sit on ground
 
-	var ground = BABYLON.MeshBuilder.CreateGround("ground", {}, scene);
+	var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6, updatable: false, subdivisions: 4 }, scene);*/
+
+	BABYLON.SceneLoader.Append("/assets/models/", "MedievilRoom_Unfinished.obj", scene, function (scene) {
+	    console.log('Handle room loading');
+	});
 
 	return scene;
 };
