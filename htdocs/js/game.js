@@ -29,7 +29,9 @@ function createScene(canvas, engine) {
 	var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
 
 	// Add and manipulate meshes in the scene
-	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:2}, scene);
+	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
+
+	var ground = BABYLON.MeshBuilder.CreateGround("ground", {}, scene);
 
 	return scene;
 };
@@ -60,13 +62,17 @@ function main() {
 
     engine.displayLoadingUI();
 
-    var scene = createScene(canvas, engine); // defined in game.js
+    var scene = createScene(canvas, engine);
 
     window.addEventListener("resize", function () {
         engine.resize();
     });
 
     engine.hideLoadingUI();
+
+    engine.runRenderLoop(function () {
+        scene.render();
+    });
 }
 
 document.addEventListener("DOMContentLoaded", main);
