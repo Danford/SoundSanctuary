@@ -11,10 +11,13 @@ illum 4
 Kd 0.72 0.72 0.72
 Ka 0.20 0.20 0.20
 Tf 1.00 1.00 1.00
+map_Kd WoodenPillar_Texture.png
 Ni 1.00
 newmtl initialShadingGroup
 illum 4
 Kd 0.50 0.50 0.50
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
+
+map_Kd ESOWall_Texture.png
 Ni 1.00
