@@ -64,7 +64,7 @@ function createScene(canvas, engine) {
             root.actionManager.isRecursive = true;
 
             root.actionManager.registerAction(new BABYLON.ExecuteCodeAction(
-                { trigger: BABYLON.ActionManager.OnPointerOverTrigger },
+                { trigger: BABYLON.ActionManager.OnPickTrigger },
                 function() {
                     alert('Mouse over!');
                 }));
