@@ -8,21 +8,6 @@ var config = {
     characer_width: 60
 };
 
-/**
-    Utility function to create a BABYLON.Texture.
-    @param string url The url of the texture to retrieve.
-    @param Babylon.Scene scene The scene to create the texture on.
-    @param function success A callback that should receive the texture after it's ready.
-    @param function error A callback that should be used if there's an error getting the texture image.
-*/
-function createTexture(url, scene, success, error) {
-    request(url, function (data) {
-        success.call(this, BABYLON.Texture.LoadFromDataString('diffuse', data, scene));
-    }, error, 'blob');
-}
-
-
-
  /**
 	Init the scene and assets for render.
 	@param HTMLElement canvas The <canvas> element that we should render to.
@@ -70,6 +55,36 @@ function createScene(canvas, engine) {
 
     var radio_music = new BABYLON.Sound('radio_music', '/assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
     }, { loop: false, autoplay: false });
+
+    // Once we have a radio
+    //radio_music.attachToMesh(radio);
+    //radio_music.play();
+
+    // Play a footsteps sound while walking and stop 
+    var footstep_sound = new BABYLON.Sound('footsteps', '/assets/sfx/full steps stereo.ogg', scene, function () { }, { loop: true, autoplay: false });
+    var footstep_checker = null;
+    var footstep_last_position = Array(camera.position.x, camera.position.z);
+    camera.onViewMatrixChangedObservable.add(function () {
+        if (!footstep_sound.isPlaying) {
+            // If we just rotated the camera, don't bother to play footsteps
+            if (footstep_last_position[0] == camera.position.x && footstep_last_position[1] == camera.position.z) {
+                return;
+            }
+
+            footstep_sound.play();
+            footstep_checker = setInterval(function () {
+                if (footstep_last_position[0] == camera.position.x && footstep_last_position[1] == camera.position.z) {
+                    footstep_sound.pause();
+                    clearInterval(footstep_checker);
+                    footstep_checker = null;
+                }
+                else {
+                    footstep_last_position[0] = camera.position.x;
+                    footstep_last_position[1] = camera.position.z;
+                }
+            }, 20);
+        }
+    });
 
 	return scene;
 };
