@@ -44,7 +44,7 @@ function createScene(canvas, engine) {
 	// Targets the camera to a particular position. In this case the scene origin
 	camera.setTarget(new BABYLON.Vector3(1, config.character_height + 1, 0));
 	camera.checkCollisions = true;
-	camera.speed = 15.0;
+	camera.speed = 10.0;
 	camera.applyGravity = true;
 	camera.ellipsoid = new BABYLON.Vector3(config.characer_width / 2, config.character_height / 2, config.characer_width / 2);
 
