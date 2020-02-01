@@ -1,0 +1,168 @@
+/**
+	Style various elements appropriately.
+	Version: 11:50PM AST 1/31/2020
+*/
+
+/* 
+	Reset all elements back to a default across all browsers.
+	http://meyerweb.com/eric/tools/css/reset/ 
+	v2.0 | 20110126
+	License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+	Begin actual styling.
+*/
+body {
+	overflow : hidden;
+}
+/**
+ * 3D text
+ */
+
+ body {
+	perspective: 600px;
+	width: 100%;
+}
+
+#wrap {
+	border: 1px solid #000;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	perspective: 100%;
+	transform: rotateY(75deg);
+	transform-style: preserve-3d;
+	transition: transform 1s ease-out;
+}
+
+body:hover #wrap {
+	transform: rotateY(-75deg);
+}
+
+#text,
+#text + div,
+#text + div + div,
+#text + div + div + div,
+#text + div + div + div + div,
+#text + div + div + div + div + div,
+#text + div + div + div + div + div + div,
+#text + div + div + div + div + div + div + div,
+#text + div + div + div + div + div + div + div + div,
+#text + div + div + div + div + div + div + div + div + div {
+	background: transparent;	
+	float:left;
+	font-size: 100px;
+	line-height: 200px;
+	font-family: Helvetica, sans-serif;
+	position: absolute;
+}
+
+#text {
+	z-index: 10;
+}
+
+#text + div {
+	color: #333;
+	transform: translateZ(-2px);
+	z-index: 9;	
+}
+
+
+#text + div + div {
+	color: #555;
+	transform: translateZ(-4px);	
+	z-index: 8;
+}
+
+
+#text + div + div + div {
+	color: #666;
+	transform: translateZ(-6px);	
+	z-index: 7;
+}
+
+#text + div + div + div + div{
+	color: #777;
+	transform: translateZ(-8px);	
+	z-index: 6;
+}
+
+
+#text + div + div + div + div + div{
+	color: #888;
+	transform: translateZ(-10px);	
+	z-index: 5;
+}
+
+
+#text + div + div + div + div + div + div {
+	color: #999;
+	transform: translateZ(-12px);	
+	z-index: 4;
+}
+
+
+#text + div + div + div + div + div + div + div{
+	color: #aaa;
+	transform: translateZ(-14px);	
+	z-index: 3;
+}
+
+
+#text + div + div + div + div + div + div + div + div{
+	color: #bbb;
+	transform: translateZ(-16px);	
+	z-index: 2;
+}
+
+
+#text + div + div + div + div + div + div + div + div + div {
+	color: #ccc;
+	transform: translateZ(-18px);	
+	z-index: 1;
+}
