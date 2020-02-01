@@ -22,7 +22,6 @@ function createScene(canvas, engine) {
 	camera.setTarget(BABYLON.Vector3.Zero());
 
 	// Attach the camera to the canvas
-
 	camera.attachControl(canvas, true);
 
 	// Add lights to the scene
@@ -35,30 +34,39 @@ function createScene(canvas, engine) {
 	return scene;
 };
 
-/// MAIN INIT BELOW HERE
-var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
-var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
-var loadingScreenDiv = document.getElementById("loadingScreen");
-var loadingScreen = new function customLoadingScreen() {
-	console.log("customLoadingScreen creation");
-};
-loadingScreen.displayLoadingUI  = function () {
-	console.log("customLoadingScreen loading");
-	loadingScreenDiv.innerHTML = "Loading...";
-};
+/**
+    main() Basically.
+*/
+function main() {
+    var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
+    var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
-loadingScreen.hideLoadingUI = function () {
-	console.log("customLoadingScreen loaded");
-	loadingScreenDiv.style.display = "none";
-};
+    var loadingScreenDiv = document.getElementById("loadingScreen");
+    var loadingScreen = new function customLoadingScreen() {
+        console.log("customLoadingScreen creation");
+    };
+    loadingScreen.displayLoadingUI = function () {
+        console.log("customLoadingScreen loading");
+        loadingScreenDiv.innerHTML = "Loading...";
+    };
 
-engine.loadingScreen = loadingScreen;
+    loadingScreen.hideLoadingUI = function () {
+        console.log("customLoadingScreen loaded");
+        loadingScreenDiv.style.display = "none";
+    };
 
-engine.displayLoadingUI();
+    engine.loadingScreen = loadingScreen;
 
-var scene = createScene(canvas, engine); // defined in game.js
+    engine.displayLoadingUI();
 
-window.addEventListener("resize", function () {
-	engine.resize();
-});
+    var scene = createScene(canvas, engine); // defined in game.js
+
+    window.addEventListener("resize", function () {
+        engine.resize();
+    });
+
+    engine.hideLoadingUI();
+}
+
+document.addEventListener("DOMContentLoaded", main);
