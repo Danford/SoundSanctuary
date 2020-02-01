@@ -7,11 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="css/style.css">
-<script src="https://preview.babylonjs.com/babylon.js"></script>
-<script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-<script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
-
-<title>Babylon FPS</title>
+<script type="text/javascript" src="https://preview.babylonjs.com/babylon.js" defer></script>
+<script type="text/javascript" src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js" defer></script>
+<script type="text/javascript" src="https://code.jquery.com/pep/0.4.3/pep.js" defer></script>
+<script type="text/javascript" src="js/game.js" defer></script>
 
 <style type="text/css">
 	html,
@@ -53,7 +52,9 @@
         var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
         var loadingScreenDiv = document.getElementById("loadingScreen");
-        var loadingScreen = new customLoadingScreen();
+        var loadingScreen = new function customLoadingScreen() {
+            console.log("customLoadingScreen creation");
+        };
 		loadingScreen.displayLoadingUI  = function () {
             console.log("customLoadingScreen loading");
             loadingScreenDiv.innerHTML = "Loading...";
@@ -67,41 +68,8 @@
         engine.loadingScreen = loadingScreen;
 
         engine.displayLoadingUI();
-
-        function customLoadingScreen() {
-            console.log("customLoadingScreen creation")
-        }
-
         
-        var scene = createScene(); //Call the createScene function
-
-	   /******* Add the create scene function ******/
-		function createScene() {
-			// Create the scene space
-			var scene = new BABYLON.Scene(engine);
-			canvas.style.width = '100%';
-			canvas.style.height = '100%';
-
-			// Add a camera to the scene and attach it to the canvas
-			var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 0, -10), scene);
-
-			// Targets the camera to a particular position. In this case the scene origin
-			camera.setTarget(BABYLON.Vector3.Zero());
-
-			// Attach the camera to the canvas
-
-			camera.attachControl(canvas, true);
-
-			// Add lights to the scene
-			var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
-			var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
-
-			// Add and manipulate meshes in the scene
-			var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:2}, scene);
-
-			return scene;
-		};
-		/******* End of the create scene function ******/    
+        var scene = createScene(canvas, engine); // defined in game.js
 
         window.addEventListener("resize", function () {
             engine.resize();
