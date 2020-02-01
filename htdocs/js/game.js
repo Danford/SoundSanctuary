@@ -39,7 +39,7 @@ function createScene(canvas, engine) {
 
 	var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6, updatable: false, subdivisions: 4 }, scene);*/
 
-	BABYLON.SceneLoader.Append("/assets/models/", "MedievilRoom_Unfinished.obj", scene, function (scene) {
+	BABYLON.SceneLoader.Append("/assets/models/", "GameJamRooms.obj", scene, function (scene) {
 	    console.log('Handle room loading');
 	});
 
