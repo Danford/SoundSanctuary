@@ -4,8 +4,24 @@
 
 /// Storage for settings
 var config = {
-    character_height: 180
+    character_height: 180,
+    characer_width: 60
 };
+
+/**
+    Utility function to create a BABYLON.Texture.
+    @param string url The url of the texture to retrieve.
+    @param Babylon.Scene scene The scene to create the texture on.
+    @param function success A callback that should receive the texture after it's ready.
+    @param function error A callback that should be used if there's an error getting the texture image.
+*/
+function createTexture(url, scene, success, error) {
+    request(url, function (data) {
+        success.call(this, BABYLON.Texture.LoadFromDataString('diffuse', data, scene));
+    }, error, 'blob');
+}
+
+
 
  /**
 	Init the scene and assets for render.
@@ -19,12 +35,18 @@ function createScene(canvas, engine) {
 	var scene = new BABYLON.Scene(engine);
 	canvas.style.width = '100%';
 	canvas.style.height = '100%';
+	scene.gravity = new BABYLON.Vector3(0, -9.8, 0);
+	scene.collisionsEnabled = true;
 
 	// Add a camera to the scene and attach it to the canvas
-	var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, config.character_height, 0), scene);
+	var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, config.character_height + 1, 0), scene);
 
 	// Targets the camera to a particular position. In this case the scene origin
-	camera.setTarget(new BABYLON.Vector3(1, config.character_height, 0));
+	camera.setTarget(new BABYLON.Vector3(1, config.character_height + 1, 0));
+	camera.checkCollisions = true;
+	camera.speed = 10.0;
+	camera.applyGravity = true;
+	camera.ellipsoid = new BABYLON.Vector3(config.characer_width / 2, config.character_height / 2, config.characer_width / 2);
 
 	// Attach the camera to the canvas
 	camera.attachControl(canvas, true);
@@ -39,8 +61,8 @@ function createScene(canvas, engine) {
 
 	var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6, updatable: false, subdivisions: 4 }, scene);*/
 
-	BABYLON.SceneLoader.Append("/assets/models/", "GameJamRooms.obj", scene, function (scene) {
-	    console.log('Handle room loading');
+    BABYLON.SceneLoader.ImportMesh(null, "/assets/models/", "GameJamRooms.obj", scene, function (meshes, particleSystems, skeletons) {
+        meshes[0].checkCollisions = true;
 	});
 
 	return scene;
