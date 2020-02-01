@@ -7,73 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="https://preview.babylonjs.com/babylon.js" defer></script>
-<script type="text/javascript" src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js" defer></script>
-<script type="text/javascript" src="https://code.jquery.com/pep/0.4.3/pep.js" defer></script>
+<script type="text/javascript" src="js/babylon.js" defer></script>
+<script type="text/javascript" src="js/babylonjs.loaders.min.js" defer></script>
+<script type="text/javascript" src="js/pep.min.js" defer></script>
 <script type="text/javascript" src="js/game.js" defer></script>
-
-<style type="text/css">
-	html,
-	body {
-		overflow: hidden;
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-	}
-
-	#renderCanvas {
-		width: 100%;
-		height: 100%;
-		touch-action: none;
-	}
-
-	#loadingScreen {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		color: white;
-		font-size: 50px;
-		text-align: center;
-		background-color: #BB464Bcc;
-		z-index: 9999;
-	}
-</style>
 </head>
 
 <body>
-
     <div id="loadingScreen">Starting...</div>
-   
     <canvas id="renderCanvas" touch-action="none"></canvas> <!-- touch-action="none" for best results from PEP -->
-
-    <script type="text/javascript">
-		var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
-        var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-
-        var loadingScreenDiv = document.getElementById("loadingScreen");
-        var loadingScreen = new function customLoadingScreen() {
-            console.log("customLoadingScreen creation");
-        };
-		loadingScreen.displayLoadingUI  = function () {
-            console.log("customLoadingScreen loading");
-            loadingScreenDiv.innerHTML = "Loading...";
-        };
-		
-		loadingScreen.hideLoadingUI = function () {
-            console.log("customLoadingScreen loaded");
-            loadingScreenDiv.style.display = "none";
-        };
-        
-        engine.loadingScreen = loadingScreen;
-
-        engine.displayLoadingUI();
-        
-        var scene = createScene(canvas, engine); // defined in game.js
-
-        window.addEventListener("resize", function () {
-            engine.resize();
-        });
-    </script>
   </body>
 </html>

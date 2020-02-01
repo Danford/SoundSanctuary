@@ -34,3 +34,31 @@ function createScene(canvas, engine) {
 
 	return scene;
 };
+
+/// MAIN INIT BELOW HERE
+var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
+var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+
+var loadingScreenDiv = document.getElementById("loadingScreen");
+var loadingScreen = new function customLoadingScreen() {
+	console.log("customLoadingScreen creation");
+};
+loadingScreen.displayLoadingUI  = function () {
+	console.log("customLoadingScreen loading");
+	loadingScreenDiv.innerHTML = "Loading...";
+};
+
+loadingScreen.hideLoadingUI = function () {
+	console.log("customLoadingScreen loaded");
+	loadingScreenDiv.style.display = "none";
+};
+
+engine.loadingScreen = loadingScreen;
+
+engine.displayLoadingUI();
+
+var scene = createScene(canvas, engine); // defined in game.js
+
+window.addEventListener("resize", function () {
+	engine.resize();
+});
