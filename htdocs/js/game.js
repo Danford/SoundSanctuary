@@ -23,7 +23,7 @@ var config = {
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                    alert('The stations all went off air at the same time.');
+                    addUIMessage('The stations all went off air at the same time.');
                 }
             }
         },
@@ -116,7 +116,12 @@ var config = {
             position: new BABYLON.Vector3(-350, 97, -740),
             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
             rotation: new BABYLON.Vector3.Zero(),
-            settings: {}
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                    addUIMessage('Not much use without the Internet.');
+                }
+            }
         },
         {
             file: 'computerMouse.obj',
@@ -154,7 +159,7 @@ var config = {
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                    alert('I ran out of gas a while back.');
+                    addUIMessage('I ran out of gas a while back.');
                 }
             }
         },
@@ -288,7 +293,7 @@ var config = {
                          checkItemInInventory('knife') &&
                          checkItemInInventory('ruler')) {
 
-                        config.game_won = true;
+                         config.game_won = true;
 
                          createSceneObject(scene, {
                              file : 'BrokenRadio.obj',
@@ -301,6 +306,8 @@ var config = {
                          });
 
                          config.radio_music.play();
+
+                         addUIMessage("I've repaired the radio!");
                      }
                      else {
                          addUIMessage("I don't have all of the parts yet.");
@@ -591,7 +598,7 @@ function addItemToInventory(item_id, quantity){
 
     console.log(item_id);
 
-    addUIMessage("You acquired " + config.item_data[item_id].name + " x" + quantity);
+    addUIMessage("Acquired " + config.item_data[item_id].name + " x" + quantity);
 }
 
 /**
