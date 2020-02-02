@@ -304,6 +304,13 @@ var config = {
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
          },
+         {
+             file: 'electronic_resistors.obj',
+             position: new BABYLON.Vector3(0, 0, 300), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(2, 2, 2),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+             settings: {}
+         },
     ]
 };
 
