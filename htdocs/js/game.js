@@ -191,10 +191,12 @@ function registerActionManager(scene) {
                 if (config.scene_objects[i].settings.interactable && config.scene_objects[i].settings.interactable_ids.indexOf(event.source.id) != -1) {
                     if (config.scene_objects[i].settings.interaction_callback) {
                         config.scene_objects[i].settings.interaction_callback.call(event.source);
+                        return;
                     }
                     else {
                         // Let the developer's know they're missing an interaction_callback
                         console.log('Found but there was no callback defined for the interactable');
+                        return;
                     }
                 }
             }
@@ -237,7 +239,10 @@ function createSceneObject(scene, objectConfig) {
                 if (typeof objectConfig.settings.interactable_ids != 'object') {
                     objectConfig.settings.interactable_ids = [];
                 }
+
+                meshes[i].id = objectConfig.file + '|' + meshes[i].id;
                 objectConfig.settings.interactable_ids.push(meshes[i].id);
+                console.log('registered ', meshes[i].id);
             }
         }
     });
@@ -389,6 +394,8 @@ function main() {
     engine.runRenderLoop(function () {
         scene.render();
     });
+
+    engine.resize();
 }
 
 document.addEventListener("DOMContentLoaded", main);
