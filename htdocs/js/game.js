@@ -14,233 +14,282 @@ var config = {
     scene_objects: [
         {
             file: 'televisionModern.obj',
-            position: new BABYLON.Vector3(560, 80, 250),
+            position: new BABYLON.Vector3(580, 80, 230),
             scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
             rotation: new BABYLON.Vector3(0.0, 20.4, 0.0),
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                    alert('The stations all went off air at the same time.');
+                alert('The stations all went off air at the same time.');
                 }
             }
         },
         {
             file : 'trashcan.obj',
-            position: new BABYLON.Vector3(-170, 0, 140),
+            position: new BABYLON.Vector3(-150, 0, 120),
             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
             rotation: new BABYLON.Vector3.Zero(),
             settings: {}
         },
         {
             file: 'kitchenStoveElectric.obj',
-            position: new BABYLON.Vector3(-325, 0, 540),
+            position: new BABYLON.Vector3(-290, 0, 520),
             scale: new BABYLON.Vector3(280.0, 260.0, 260.0),
             rotation: new BABYLON.Vector3.Zero(),
             settings: {}
         },
         {
             file: 'kitchenFridgeLarge.obj',
-            position: new BABYLON.Vector3(-560, 0, 120),
+            position: new BABYLON.Vector3(-540, 0, 100),
             scale: new BABYLON.Vector3(260.0, 260.0, 260.0),
             rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
             settings: {}
         },
         {
             file: 'kitchenCoffeeMachine.obj',
-            position: new BABYLON.Vector3(-600, 110, 250),
+            position: new BABYLON.Vector3(-570, 109, 230),
             scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
             rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
             settings: {}
         },
         {
             file: 'pottedPlant.obj',
-            position: new BABYLON.Vector3(420, 0, 500),
+            position: new BABYLON.Vector3(440, 0, 480),
             scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
             rotation: new BABYLON.Vector3.Zero(),
             settings: {}
         },
         {
             file: 'lampRoundFloor.obj',
-            position: new BABYLON.Vector3(0, 0, 460),
+            position: new BABYLON.Vector3(20, 0, 440),
             scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
             rotation: new BABYLON.Vector3.Zero(),
             settings: {}
         },
         {
             file: 'stoolBarSquare.obj',
-            position: new BABYLON.Vector3(-70, 0, 400),
+            position: new BABYLON.Vector3(-50, 0, 380),
             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
             rotation: new BABYLON.Vector3.Zero(),
             settings: {}
         },
-         {
-             file: 'stoolBarSquare.obj',
-             position: new BABYLON.Vector3(-115, 0, 320),
-             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-             rotation: new BABYLON.Vector3(0, 2.0, 0),
+        {
+            file: 'stoolBarSquare.obj',
+            position: new BABYLON.Vector3(-95, 0, 300),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3(0, 2.0, 0),
+            settings: {}
+        },
+        {
+            file: 'hoodModern.obj',
+            position: new BABYLON.Vector3(-280, 220, 580),
+            scale: new BABYLON.Vector3(280.0, 260.0, 260.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'rugDoormat.obj',
+            position: new BABYLON.Vector3(380, 0, -410),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3(0, 20.4, 0),
+            settings: {}
+        },
+        {
+            file: 'knifeBlock.obj',
+            position: new BABYLON.Vector3(-480, 105, 610),
+            scale: new BABYLON.Vector3(80.0, 80.0, 80.0),
+            rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+            settings: {}
+        },
+        {
+            file: 'computerScreen.obj',
+            position: new BABYLON.Vector3(-350, 97, -740),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'computerMouse.obj',
+            position: new BABYLON.Vector3(-360, 97, -760),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'computerKeyboard.obj',
+            position: new BABYLON.Vector3(-370, 97, -770),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'chairDesk.obj',
+            position: new BABYLON.Vector3(-370, 0, -820),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+            settings: {}
+        },
+        {
+            file: 'lampSquareFloor.obj',
+            position: new BABYLON.Vector3(-80, 0, -1100),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'NormalCar1.obj',
+            position: new BABYLON.Vector3(490, 0, -1220),
+            scale: new BABYLON.Vector3(135.0, 135.0, 135.0),
+            rotation: new BABYLON.Vector3(0, -20.4, 0),
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                    alert('I ran out of gas a while back.');
+                }
+            }
+        },
+        { // Alec model
+            file: 'Knife.obj',
+            position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                nudge: new BABYLON.Vector3(-20, -5, 5), // Adjust position by a small amount
+                interactable: true,
+                interaction_callback: function () {
+                    // This gets called when this instance gets clicked on.
+                    alert('Stab all the things');
+                }
+            }
+        },
+        {
+            file: 'amp.obj',
+            position: new BABYLON.Vector3(0, 0, 100), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(0.1, 0.1, 0.1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                    // This gets called when this instance gets clicked on.
+                    alert('Amped up');
+                }
+            }
+        },
+        {
+            file: 'battery.obj',
+            position: new BABYLON.Vector3(0, 0, 200), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(0.5, 0.5, 0.5),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                // This gets called when this instance gets clicked on.
+                alert('Power up');
+                }
+            }
+        },
+        { // Alec model
+            file: 'BrokenRadio.obj',
+            position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                // This gets called when this instance gets clicked on.
+                alert('Dancing is forbidden');
+                }
+            }
+        },
+        { // Alec model
+            file: 'Ruler.obj',
+            position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                // This gets called when this instance gets clicked on.
+                alert('What measures up?');
+                }
+            }
+        },
+        { // Alec model
+            file: 'Speaker.obj',
+            position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                nudge: new BABYLON.Vector3(0, 0, -20),
+                interactable: true,
+                interaction_callback: function () {
+                // This gets called when this instance gets clicked on.
+                alert('Loud noises!');
+                }
+            }
+        },
+        { // Alec model
+            file: 'Tape.obj',
+            position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                // This gets called when this instance gets clicked on.
+                alert('If it moves and it\'s not supposed to');
+                }
+            }
+        },
+        { // Alec model
+            file: 'GarageDoor.obj',
+            position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+            scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+            rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+            settings: {}
+        },
+         { // Alec model
+             file: 'ConstrutionTable.obj',
+             position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+             settings: {}
+         },
+         { // Alec model
+             file: 'Smoke_D_Resize.obj',
+             position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
          },
          {
-             file: 'hoodModern.obj',
-             position: new BABYLON.Vector3(-315, 220, 600),
-             scale: new BABYLON.Vector3(280.0, 260.0, 260.0),
-             rotation: new BABYLON.Vector3.Zero(),
+             file: '33pfCapacitor.obj',
+             position: new BABYLON.Vector3(0, 0, 350), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(0.01, 0.01, 0.01),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
          },
          {
-             file: 'rugDoormat.obj',
-             position: new BABYLON.Vector3(330, 0, -400),
-             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-             rotation: new BABYLON.Vector3(0, 20.4, 0),
+             file: 'breadboard.obj',
+             position: new BABYLON.Vector3(-150, 105, 400), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(0.1, 0.1, 0.1),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+             settings: {}
+         },
+         { // Alec model
+             file: 'GuitarPedal.obj',
+             position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
          },
          {
-             file: 'knifeBlock.obj',
-             position: new BABYLON.Vector3(-500, 105, 630),
-             scale: new BABYLON.Vector3(80.0, 80.0, 80.0),
-             rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+             file: 'OP_Amp.obj',
+             position: new BABYLON.Vector3(0, 0, 400), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(2, 2, 2),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
          },
-          {
-              file: 'computerScreen.obj',
-              position: new BABYLON.Vector3(-370, 97, -720),
-              scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-              rotation: new BABYLON.Vector3.Zero(),
-              settings: {}
-          },
-           {
-               file: 'computerMouse.obj',
-               position: new BABYLON.Vector3(-380, 97, -740),
-               scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-               rotation: new BABYLON.Vector3.Zero(),
-               settings: {}
-           },
-            {
-                file: 'computerKeyboard.obj',
-                position: new BABYLON.Vector3(-390, 97, -750),
-                scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-                rotation: new BABYLON.Vector3.Zero(),
-                settings: {}
-            },
-            {
-                file: 'chairDesk.obj',
-                position: new BABYLON.Vector3(-390, 0, -800),
-                scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-                rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
-                settings: {}
-            },
-            {
-                file: 'lampSquareFloor.obj',
-                position: new BABYLON.Vector3(-100, 0, -1300),
-                scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
-                rotation: new BABYLON.Vector3.Zero(),
-                settings: {}
-            },
-            {
-                file: 'NormalCar1.obj',
-                position: new BABYLON.Vector3(470, 0, -1200),
-                scale: new BABYLON.Vector3(135.0, 135.0, 135.0),
-                rotation: new BABYLON.Vector3(0, -20.4, 0),
-                settings: {
-                    interactable: true,
-                    interaction_callback: function () {
-                        alert('I ran out of gas a while back.');
-                    }
-                }
-            },
-            { // Alec model
-                file: 'Knife.obj',
-                position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
-                scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
-                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                settings: {
-                    nudge: new BABYLON.Vector3(-25, 1, 15), // Adjust position by a small amount
-                    interactable: true,
-                    interaction_callback: function () {
-                        // This gets called when this instance gets clicked on.
-                        alert('Stab all the things');
-                    }
-                }
-            },
-             { // Alec model
-                 file: 'amp.obj',
-                 position: new BABYLON.Vector3(0, 0, 100), // Set to zero since it automatically positions itself
-                 scale: new BABYLON.Vector3(0.1, 0.1, 0.1),  // Set to 1s to use native scale
-                 rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                 settings: {
-                     interactable: true,
-                     interaction_callback: function () {
-                         // This gets called when this instance gets clicked on.
-                         alert('Amped up');
-                     }
-                 }
-             },
-            { // Alec model
-                file: 'battery.obj',
-                position: new BABYLON.Vector3(0, 0, 200), // Set to zero since it automatically positions itself
-                scale: new BABYLON.Vector3(0.5, 0.5, 0.5),  // Set to 1s to use native scale
-                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                settings: {
-                    interactable: true,
-                    interaction_callback: function () {
-                        // This gets called when this instance gets clicked on.
-                        alert('Power up');
-                    }
-                }
-            },
-            { // Alec model
-                file: 'BrokenRadio.obj',
-                position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
-                scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
-                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                settings: {
-                    interactable: true,
-                    interaction_callback: function () {
-                        // This gets called when this instance gets clicked on.
-                        alert('Dancing is forbidden');
-                    }
-                }
-            },
-            { // Alec model
-                file: 'Ruler.obj',
-                position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
-                scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
-                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                settings: {
-                    interactable: true,
-                    interaction_callback: function () {
-                        // This gets called when this instance gets clicked on.
-                        alert('What measures up?');
-                    }
-                }
-            },
-             { // Alec model
-                 file: 'Speaker.obj',
-                 position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
-                 scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
-                 rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                 settings: {
-                     nudge: new BABYLON.Vector3(0, 5, 0),
-                     interactable: true,
-                     interaction_callback: function () {
-                         // This gets called when this instance gets clicked on.
-                         alert('Loud noises!');
-                     }
-                 }
-             },
-              { // Alec model
-                  file: 'Tape.obj',
-                  position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
-                  scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
-                  rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-                  settings: {
-                      interactable: true,
-                      interaction_callback: function () {
-                          // This gets called when this instance gets clicked on.
-                          alert('If it moves and it\'s not supposed to');
-                      }
-                  }
-              }
 
     ]
 };
@@ -363,7 +412,7 @@ function createScene(canvas, engine) {
 	var light5 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 1, 0), scene);
 
     // Load area geometry
-    BABYLON.SceneLoader.ImportMesh(null, "assets/models/", "GameJamRoom_parted.obj", scene, function (meshes, particleSystems, skeletons) {
+    BABYLON.SceneLoader.ImportMesh(null, "assets/models/", "GJRoom3.0.obj", scene, function (meshes, particleSystems, skeletons) {
         for (var i = 0; i < meshes.length; i++) {
             meshes[i].checkCollisions = true;
         }
