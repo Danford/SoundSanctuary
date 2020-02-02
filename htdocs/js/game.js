@@ -55,6 +55,23 @@ function createScene(canvas, engine) {
         }
     });
 
+        BABYLON.SceneLoader.ImportMesh("", "/assets/models/", "Knife.obj", scene, function(newMeshes) {
+            var root = new BABYLON.Mesh('Name', scene);
+            newMeshes[0].parent = root;
+            
+
+            newMeshes[0].enablePointerMoveEvents = true;
+          
+            root.actionManager = new BABYLON.ActionManager(scene);
+            root.actionManager.isRecursive = true;
+
+            root.actionManager.registerAction(new BABYLON.ExecuteCodeAction(
+                { trigger: BABYLON.ActionManager.OnPickTrigger },
+                function() {
+                    alert('Mouse over!');
+                }));
+        });
+        
     var radio_music = new BABYLON.Sound('radio_music', '/assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
     }, { loop: false, autoplay: false });
 
