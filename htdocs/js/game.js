@@ -302,6 +302,9 @@ var config = {
 
                          config.radio_music.play();
                      }
+                     else {
+                         addUIMessage("I don't have all of the parts yet.");
+                     }
                  }
              }
          },
@@ -410,7 +413,7 @@ var config = {
             image: null,
             model : ''
         },
-        "electolyte_capacitor": {
+        "electrolyte_capacitor": {
             name: "22 uF Electrolyte Capacitor",
             image: null,
             model : ''
@@ -516,6 +519,31 @@ function registerActionManager(scene) {
 }
 
 /**
+    Add a message to the UI.
+    @param string html The HTML string to display as a message to the player.
+    @param int milliseconds The amount of time to display the message before it disappears.
+*/
+function addUIMessage(html, milliseconds) {
+    if (typeof milliseconds == 'undefined') {
+        milliseconds = 5000;
+    }
+
+    if (!ui) {
+        console.log('No UI reference');
+        return;
+    }
+
+    var element = document.createElement('div');
+    element.innerHTML = html;
+
+    ui.appendChild(element);
+
+    setTimeout(function () {
+        ui.removeChild(element);
+    }, milliseconds);
+}
+
+/**
     Remove an interactable model from the scene given only one of it's mesh ids.
     @param Babylon.Scene scene The scene the mesh exists in.
     @param string mesh_id The id of the mesh that should be used to find the model to remove.
@@ -555,6 +583,15 @@ function addItemToInventory(item_id, quantity){
     }
 
     config.inventory[item_id] += quantity;
+
+    if (config.sfx.inventory && config.sfx.inventory.length) {
+        // Pick a random sfx and play it
+        config.sfx.inventory[parseInt(Math.random() * config.sfx.inventory.length)].play();
+    }
+
+    console.log(item_id);
+
+    addUIMessage("You acquired " + config.item_data[item_id].name + " x" + quantity);
 }
 
 /**
@@ -732,7 +769,10 @@ function main() {
     var canvas = document.getElementById("renderCanvas"); // Get the canvas element 
     var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
+    ui = document.getElementById('messages');
+
     var loadingScreenDiv = document.getElementById("loadingScreen");
+    var loadingImage = document.getElementById("loaderImage");
     var loadingScreen = new function customLoadingScreen() {
         console.log("customLoadingScreen creation");
     };
@@ -744,6 +784,7 @@ function main() {
     loadingScreen.hideLoadingUI = function () {
         console.log("customLoadingScreen loaded");
         loadingScreenDiv.style.display = "none";
+        loadingImage.style.display = "none";
     };
 
     engine.loadingScreen = loadingScreen;
@@ -752,9 +793,32 @@ function main() {
 
     scene = createScene(canvas, engine);
 
-    //ui = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("myUI");
     config.radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
     }, { loop: false, autoplay: false });
+
+    // Define a list of sound effects grouped by usage and load all the sounds
+    var sfx = {
+        'inventory': [
+            'cloth-inventory.wav',
+            'leather_inventory.wav',
+            'metal-clash.wav',
+            'ring_inventory.wav'
+        ]
+    };
+
+    config.sfx = {};
+    for (var key in sfx) {
+        if (!sfx.hasOwnProperty(key)) {
+            continue;
+        }
+
+        config.sfx[key] = [];
+        
+        for (var i = 0; i < sfx[key].length; i++) {
+            config.sfx[key].push(new BABYLON.Sound(null, 'assets/sfx/' + sfx[key][i], scene, function () {
+            }, { loop: false, autoplay: false }));
+        }
+    }
 
     window.addEventListener("resize", function () {
         engine.resize();
