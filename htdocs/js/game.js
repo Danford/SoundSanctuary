@@ -17,7 +17,12 @@ var config = {
             position: new BABYLON.Vector3(560, 80, 250),
             scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
             rotation: new BABYLON.Vector3(0.0, 20.4, 0.0),
-            settings: {}
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                    alert('The stations all went off air at the same time.');
+                }
+            }
         },
         {
             file : 'trashcan.obj',
@@ -136,11 +141,69 @@ var config = {
                 position: new BABYLON.Vector3(470, 0, -1200),
                 scale: new BABYLON.Vector3(135.0, 135.0, 135.0),
                 rotation: new BABYLON.Vector3(0, -20.4, 0),
-                settings: {}
+                settings: {
+                    interactable: true,
+                    interaction_callback: function () {
+                        alert('I ran out of gas a while back.');
+                    }
+                }
+            },
+            { // Alec model
+                file: 'Knife.obj',
+                position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+                scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                settings: {
+                    nudge: new BABYLON.Vector3(-25, 1, 15), // Adjust position by a small amount
+                    interactable: true,
+                    interaction_callback: function () {
+                        // This gets called when this instance gets clicked on.
+                        alert('Stab all the things');
+                    }
+                }
             }
 
     ]
 };
+
+/// Prevent multiple action managers from being registered
+var register_action_manager_once = null;
+
+/**
+    If there's an interactable then register the handler to pick it up.
+    @param Babylon.Scene scene The scene that we'll be monitoring.
+    @return Babylon.Mesh The root of the scene.
+*/
+function registerActionManager(scene) {
+    if (register_action_manager_once) {
+        return register_action_manager_once;
+    }
+
+    var root = new BABYLON.Mesh('Name', scene);
+    root.actionManager = new BABYLON.ActionManager(scene);
+    root.actionManager.isRecursive = true;
+
+    root.actionManager.registerAction(new BABYLON.ExecuteCodeAction(
+        { trigger: BABYLON.ActionManager.OnPickTrigger },
+        function (event) {
+            for (var i = 0; i < config.scene_objects.length; i++) {
+                // If the config is interactable and has the id of the source registered then try to execute the callback
+                if (config.scene_objects[i].settings.interactable && config.scene_objects[i].settings.interactable_ids.indexOf(event.source.id) != -1) {
+                    if (config.scene_objects[i].settings.interaction_callback) {
+                        config.scene_objects[i].settings.interaction_callback.call(event.source);
+                    }
+                    else {
+                        // Let the developer's know they're missing an interaction_callback
+                        console.log('Found but there was no callback defined for the interactable');
+                    }
+                }
+            }
+        }));
+
+    register_action_manager_once = root;
+
+    return root;
+}
 
 /**
     Walk through a list of scene objects and init each one.
@@ -149,6 +212,7 @@ var config = {
 */
 function createSceneObject(scene, objectConfig) {
     BABYLON.SceneLoader.ImportMesh(null, "assets/models/", objectConfig.file, scene, function (meshes, particleSystems, skeletons) {
+
         for (var i = 0; i < meshes.length; i++) {
             if (!objectConfig.settings.noCollisionChecking){
                 meshes[i].checkCollisions = true;
@@ -157,6 +221,24 @@ function createSceneObject(scene, objectConfig) {
             meshes[i].rotation = objectConfig.rotation;
             meshes[i].position = objectConfig.position;
             meshes[i].scaling = objectConfig.scale;
+
+            if (objectConfig.settings.nudge){
+                meshes[i].position.x += objectConfig.settings.nudge.x;
+                meshes[i].position.y += objectConfig.settings.nudge.y;
+                meshes[i].position.z += objectConfig.settings.nudge.z;
+            }
+
+            if (objectConfig.settings.interactable) {
+                var root = registerActionManager(scene);
+                meshes[i].parent = root;
+                meshes[i].enablePointerMoveEvents = true;
+
+                // Create a list of mesh ids that could be clicked on to trigger the callback.
+                if (typeof objectConfig.settings.interactable_ids != 'object') {
+                    objectConfig.settings.interactable_ids = [];
+                }
+                objectConfig.settings.interactable_ids.push(meshes[i].id);
+            }
         }
     });
 }
@@ -211,7 +293,7 @@ function createScene(canvas, engine) {
     }
 
     // Load interactive objects
-    BABYLON.SceneLoader.ImportMesh("", "assets/models/", "Knife.obj", scene, function(newMeshes) {
+    /*BABYLON.SceneLoader.ImportMesh("", "assets/models/", "Knife.obj", scene, function(newMeshes) {
         var root = new BABYLON.Mesh('Name', scene);
 
         for (var i = 0; i < newMeshes.length; i++) {
@@ -232,7 +314,7 @@ function createScene(canvas, engine) {
             function() {
                 alert('Mouse over!');
             }));
-    });
+    });*/
         
     var radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
     }, { loop: false, autoplay: false });
