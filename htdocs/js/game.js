@@ -39,7 +39,106 @@ var config = {
             scale: new BABYLON.Vector3(260.0, 260.0, 260.0),
             rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
             settings: {}
-        }
+        },
+        {
+            file: 'kitchenCoffeeMachine.obj',
+            position: new BABYLON.Vector3(-600, 110, 250),
+            scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
+            rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+            settings: {}
+        },
+        {
+            file: 'pottedPlant.obj',
+            position: new BABYLON.Vector3(420, 0, 500),
+            scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'lampRoundFloor.obj',
+            position: new BABYLON.Vector3(0, 0, 460),
+            scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'stoolBarSquare.obj',
+            position: new BABYLON.Vector3(-70, 0, 400),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+         {
+             file: 'stoolBarSquare.obj',
+             position: new BABYLON.Vector3(-115, 0, 320),
+             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+             rotation: new BABYLON.Vector3(0, 2.0, 0),
+             settings: {}
+         },
+         {
+             file: 'hoodModern.obj',
+             position: new BABYLON.Vector3(-315, 220, 600),
+             scale: new BABYLON.Vector3(280.0, 260.0, 260.0),
+             rotation: new BABYLON.Vector3.Zero(),
+             settings: {}
+         },
+         {
+             file: 'rugDoormat.obj',
+             position: new BABYLON.Vector3(330, 0, -400),
+             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+             rotation: new BABYLON.Vector3(0, 20.4, 0),
+             settings: {}
+         },
+         {
+             file: 'knifeBlock.obj',
+             position: new BABYLON.Vector3(-500, 105, 630),
+             scale: new BABYLON.Vector3(80.0, 80.0, 80.0),
+             rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+             settings: {}
+         },
+          {
+              file: 'computerScreen.obj',
+              position: new BABYLON.Vector3(-370, 97, -720),
+              scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+              rotation: new BABYLON.Vector3.Zero(),
+              settings: {}
+          },
+           {
+               file: 'computerMouse.obj',
+               position: new BABYLON.Vector3(-380, 97, -740),
+               scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+               rotation: new BABYLON.Vector3.Zero(),
+               settings: {}
+           },
+            {
+                file: 'computerKeyboard.obj',
+                position: new BABYLON.Vector3(-390, 97, -750),
+                scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+                rotation: new BABYLON.Vector3.Zero(),
+                settings: {}
+            },
+            {
+                file: 'chairDesk.obj',
+                position: new BABYLON.Vector3(-390, 0, -800),
+                scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+                rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+                settings: {}
+            },
+            {
+                file: 'lampSquareFloor.obj',
+                position: new BABYLON.Vector3(-100, 0, -1300),
+                scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+                rotation: new BABYLON.Vector3.Zero(),
+                settings: {}
+            },
+            {
+                file: 'NormalCar1.obj',
+                position: new BABYLON.Vector3(470, 0, -1200),
+                scale: new BABYLON.Vector3(135.0, 135.0, 135.0),
+                rotation: new BABYLON.Vector3(0, -20.4, 0),
+                settings: {}
+            }
+
     ]
 };
 
@@ -49,7 +148,7 @@ var config = {
     @param object Config The configuration for this instance of the model.
 */
 function createSceneObject(scene, objectConfig) {
-    BABYLON.SceneLoader.ImportMesh(null, "/assets/models/", objectConfig.file, scene, function (meshes, particleSystems, skeletons) {
+    BABYLON.SceneLoader.ImportMesh(null, "assets/models/", objectConfig.file, scene, function (meshes, particleSystems, skeletons) {
         for (var i = 0; i < meshes.length; i++) {
             if (!objectConfig.settings.noCollisionChecking){
                 meshes[i].checkCollisions = true;
@@ -98,7 +197,7 @@ function createScene(canvas, engine) {
 	var light5 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 1, 0), scene);
 
     // Load area geometry
-    BABYLON.SceneLoader.ImportMesh(null, "/assets/models/", "GameJamRoom_parted.obj", scene, function (meshes, particleSystems, skeletons) {
+    BABYLON.SceneLoader.ImportMesh(null, "assets/models/", "GameJamRoom_parted.obj", scene, function (meshes, particleSystems, skeletons) {
         for (var i = 0; i < meshes.length; i++) {
             meshes[i].checkCollisions = true;
         }
@@ -112,11 +211,18 @@ function createScene(canvas, engine) {
     }
 
     // Load interactive objects
-    BABYLON.SceneLoader.ImportMesh("", "/assets/models/", "Knife.obj", scene, function(newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "assets/models/", "Knife.obj", scene, function(newMeshes) {
         var root = new BABYLON.Mesh('Name', scene);
-        newMeshes[0].parent = root;
 
-        newMeshes[0].enablePointerMoveEvents = true;
+        for (var i = 0; i < newMeshes.length; i++) {
+            newMeshes[i].parent = root;
+            newMeshes[i].enablePointerMoveEvents = true;
+
+            // Shift slightly to not conflict with stove
+            newMeshes[i].position.y += 1;
+            newMeshes[i].position.x -= 25;
+            newMeshes[i].position.z += 15;
+        }
           
         root.actionManager = new BABYLON.ActionManager(scene);
         root.actionManager.isRecursive = true;
@@ -128,7 +234,7 @@ function createScene(canvas, engine) {
             }));
     });
         
-    var radio_music = new BABYLON.Sound('radio_music', '/assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
+    var radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
     }, { loop: false, autoplay: false });
 
     // Once we have a radio
@@ -136,7 +242,7 @@ function createScene(canvas, engine) {
     //radio_music.play();
 
     // Play a footsteps sound while walking and stop 
-    var footstep_sound = new BABYLON.Sound('footsteps', '/assets/sfx/full steps stereo.ogg', scene, function () { }, { loop: true, autoplay: false });
+    var footstep_sound = new BABYLON.Sound('footsteps', 'assets/sfx/full steps stereo.ogg', scene, function () { }, { loop: true, autoplay: false });
     var footstep_checker = null;
     var footstep_last_position = Array(camera.position.x, camera.position.z);
     camera.onViewMatrixChangedObservable.add(function () {
