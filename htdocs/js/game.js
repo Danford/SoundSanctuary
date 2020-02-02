@@ -268,6 +268,10 @@ var config = {
              settings: {
                  interactable: true,
                  interaction_callback: function () {
+                     if (config.game_won) {
+                         return;
+                     }
+
                      if (checkItemInInventory('megahome_resistor') &&
                          checkItemInInventory('10nf_capacitor') &&
                          checkItemInInventory('wire') &&
@@ -284,18 +288,19 @@ var config = {
                          checkItemInInventory('knife') &&
                          checkItemInInventory('ruler')) {
 
+                        config.game_won = true;
+
                          createSceneObject(scene, {
                              file : 'BrokenRadio.obj',
                              position: new BABYLON.Vector3.Zero(),
                              scale: new BABYLON.Vector3(1, 1, 1),
                              rotation: new BABYLON.Vector3.Zero(),
                              settings: {
-                                 nudge : new BABYLON.Vector3(160, 20, -20)
+                                 nudge : new BABYLON.Vector3(30, 7, -5)
                              }
                          });
 
-                         var radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
-                         }, { loop: false, autoplay: true });
+                         config.radio_music.play();
                      }
                  }
              }
@@ -465,6 +470,9 @@ var config = {
 
 /// Global scene access once it's created.
 var scene = null;
+
+/// Global ui access once it's created.
+var ui = null;
 
 /// Prevent multiple action managers from being registered
 var register_action_manager_once = null;
@@ -744,7 +752,9 @@ function main() {
 
     scene = createScene(canvas, engine);
 
-    //var ui = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('ui');
+    //ui = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("myUI");
+    config.radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
+    }, { loop: false, autoplay: false });
 
     window.addEventListener("resize", function () {
         engine.resize();
