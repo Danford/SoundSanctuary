@@ -10,6 +10,9 @@ var config = {
     // Width of the character in units
     characer_width: 60,
 
+    // Storage for the character's inventory
+    inventory: {},
+
     // List of objects to load and place in the scene
     scene_objects: [
         {
@@ -20,7 +23,7 @@ var config = {
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                alert('The stations all went off air at the same time.');
+                    alert('The stations all went off air at the same time.');
                 }
             }
         },
@@ -43,7 +46,14 @@ var config = {
             position: new BABYLON.Vector3(-540, 0, 100),
             scale: new BABYLON.Vector3(260.0, 260.0, 260.0),
             rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
-            settings: {}
+            settings: {
+                interactable: true,
+                interaction_callback: function () {
+                    removeModel(scene, this.id);
+                    addItemToInventory('wire');
+                    addItemToInventory('insulated_wire');
+                }
+            }
         },
         {
             file: 'kitchenCoffeeMachine.obj',
@@ -157,25 +167,26 @@ var config = {
                 nudge: new BABYLON.Vector3(-20, -3, 0), // Adjust position by a small amount
                 interactable: true,
                 interaction_callback: function () {
-                    // This gets called when this instance gets clicked on.
-                    alert('Stab all the things');
+                    removeModel(scene, this.id);
+                    addItemToInventory('knife');
                 }
             }
         },
         {
             file: 'amp.obj',
-            position: new BABYLON.Vector3(0, 0, 100), // Set to zero since it automatically positions itself
+            position: new BABYLON.Vector3(-620, 20, -1100), // Set to zero since it automatically positions itself
             scale: new BABYLON.Vector3(0.1, 0.1, 0.1),  // Set to 1s to use native scale
             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                    // This gets called when this instance gets clicked on.
-                    alert('Amped up');
+                    removeModel(scene, this.id);
+                    addItemToInventory('electrolyte_capacitor');
+                    addItemToInventory('megahome_resistor');
                 }
             }
         },
-        {
+        /*{
             file: 'battery.obj',
             position: new BABYLON.Vector3(0, 0, 200), // Set to zero since it automatically positions itself
             scale: new BABYLON.Vector3(0.5, 0.5, 0.5),  // Set to 1s to use native scale
@@ -187,7 +198,7 @@ var config = {
                 alert('Power up');
                 }
             }
-        },
+        },*/
         { // Alec model
             file: 'BrokenRadio.obj',
             position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
@@ -196,8 +207,9 @@ var config = {
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                // This gets called when this instance gets clicked on.
-                alert('Dancing is forbidden');
+                    removeModel(scene, this.id);
+                    addItemToInventory('10nf_capacitor');
+                    addItemToInventory('turning_capacitor');
                 }
             }
         },
@@ -209,8 +221,8 @@ var config = {
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                // This gets called when this instance gets clicked on.
-                alert('What measures up?');
+                    removeModel(scene, this.id);
+                    addItemToInventory('ruler');
                 }
             }
         },
@@ -223,8 +235,8 @@ var config = {
                 nudge: new BABYLON.Vector3(0, 0, -20),
                 interactable: true,
                 interaction_callback: function () {
-                // This gets called when this instance gets clicked on.
-                alert('Loud noises!');
+                    removeModel(scene, this.id);
+                    addItemToInventory('speaker');
                 }
             }
         },
@@ -236,8 +248,8 @@ var config = {
             settings: {
                 interactable: true,
                 interaction_callback: function () {
-                // This gets called when this instance gets clicked on.
-                alert('If it moves and it\'s not supposed to');
+                    removeModel(scene, this.id);
+                    addItemToInventory('tape');
                 }
             }
         },
@@ -253,66 +265,206 @@ var config = {
              position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-             settings: {}
+             settings: {
+                 interactable: true,
+                 interaction_callback: function () {
+                     if (checkItemInInventory('megahome_resistor') &&
+                         checkItemInInventory('10nf_capacitor') &&
+                         checkItemInInventory('wire') &&
+                         checkItemInInventory('turning_capacitor') &&
+                         checkItemInInventory('electrolyte_capacitor') &&
+                         checkItemInInventory('33_capacitor') &&
+                         checkItemInInventory('insulated_wire') &&
+                         checkItemInInventory('9volt_battery') &&
+                         checkItemInInventory('breadboard') &&
+                         checkItemInInventory('tape') &&
+                         checkItemInInventory('op_amp') &&
+                         checkItemInInventory('rolling_pin') &&
+                         checkItemInInventory('speaker') &&
+                         checkItemInInventory('knife') &&
+                         checkItemInInventory('ruler')) {
+
+                         createSceneObject(scene, {
+                             file : 'BrokenRadio.obj',
+                             position: new BABYLON.Vector3.Zero(),
+                             scale: new BABYLON.Vector3(1, 1, 1),
+                             rotation: new BABYLON.Vector3.Zero(),
+                             settings: {
+                                 nudge : new BABYLON.Vector3(160, 20, -20)
+                             }
+                         });
+
+                         var radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
+                         }, { loop: false, autoplay: true });
+                     }
+                 }
+             }
          },
          { // Alec model
              file: 'Smoke_D_Resize.obj',
              position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-             settings: {}
+             settings: {
+                 interactable: true,
+                 interaction_callback: function () {
+                     removeModel(scene, this.id);
+                     addItemToInventory('9volt_battery');
+                 }
+             }
          },
-         {
+         /*{
              file: '33pfCapacitor.obj',
              position: new BABYLON.Vector3(0, 0, 350), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(0.01, 0.01, 0.01),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
-         },
+         },*/
          {
              file: 'breadboard.obj',
              position: new BABYLON.Vector3(-150, 105, 400), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(0.1, 0.1, 0.1),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-             settings: {}
+             settings: {
+                 interactable: true,
+                 interaction_callback: function () {
+                     removeModel(scene, this.id);
+                     addItemToInventory('breadboard');
+                 }
+             }
          },
          { // Alec model
              file: 'GuitarPedal.obj',
              position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-             settings: {}
+             settings: {
+                 interactable: true,
+                 interaction_callback: function () {
+                     removeModel(scene, this.id);
+                     addItemToInventory('33_capacitor');
+                     addItemToInventory('op_amp');
+                 }
+             }
          },
-         {
+         /*{
              file: 'OP_Amp.obj',
              position: new BABYLON.Vector3(0, 0, 400), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(2, 2, 2),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
-         },
+         },*/
          { // Alec model
              file: 'RollingPin.obj',
              position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
-             settings: {}
+             settings: {
+                 interactable: true,
+                 interaction_callback: function () {
+                     removeModel(scene, this.id);
+                     addItemToInventory('rolling_pin');
+                 }
+             }
          },
-         {
+         /*{
              file: 'cap_electr.obj',
              position: new BABYLON.Vector3(0, 0, 380), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(2, 2, 2),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
-         },
-         {
+         },*/
+         /*{
              file: 'electronic_resistors.obj',
              position: new BABYLON.Vector3(0, 0, 300), // Set to zero since it automatically positions itself
              scale: new BABYLON.Vector3(2, 2, 2),  // Set to 1s to use native scale
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
-         },
-    ]
+         }*/
+    ],
+
+    /// Storage for items that can be in the inventory mapped by ID
+    item_data: {
+        "megahome_resistor": {
+            name: "Megahome Resistor",
+            image: null,
+            model : ''
+        },
+        "10nf_capacitor": {
+            name: "10nF Capacitor",
+            image: null,
+            model : ''
+        },
+        "wire": {
+            name: "Wire",
+            image: null,
+            model : ''
+        },
+        "turning_capacitor": {
+            name: "2200 pF Turning Capacitor",
+            image: null,
+            model : ''
+        },
+        "electolyte_capacitor": {
+            name: "22 uF Electrolyte Capacitor",
+            image: null,
+            model : ''
+        },
+        "33_capacitor": {
+            name: "33pF Capacitor",
+            image: null,
+            model:''
+        },
+        "insulated_wired": {
+            name: "Insulated Wire",
+            image: null,
+            model: ''
+        },
+        "9volt_battery": {
+            name: "9volt Battery",
+            image: null,
+            model : ''
+        },
+        "breadboard": {
+            name: "Breadboard",
+            image: null,
+            model : ''
+        },
+        "tape": {
+            name: "Tape",
+            image: null,
+            model:''
+        },
+        "op_amp": {
+            name: "Operational Amplifier",
+            image: null,
+            model : ''
+        },
+        "rolling_pin": {
+            name: "Rolling Pin",
+            image: null,
+            model : ''
+        },
+        "speaker": {
+            name: "Speaker",
+            image: null,
+            model : ''
+        },
+        "knife": {
+            name: "Knife (Wire Strippers)",
+            image: null,
+            model : ''
+        },
+        "ruler": {
+            name: "Ruler",
+            image: null,
+            model : ''
+        }
+    }
 };
+
+/// Global scene access once it's created.
+var scene = null;
 
 /// Prevent multiple action managers from being registered
 var register_action_manager_once = null;
@@ -353,6 +505,68 @@ function registerActionManager(scene) {
     register_action_manager_once = root;
 
     return root;
+}
+
+/**
+    Remove an interactable model from the scene given only one of it's mesh ids.
+    @param Babylon.Scene scene The scene the mesh exists in.
+    @param string mesh_id The id of the mesh that should be used to find the model to remove.
+*/
+function removeModel(scene, mesh_id) {
+    // Find the config that has a list of all meshes so we can remove them.
+    for (var i = 0; i < config.scene_objects.length; i++) {
+        // If the config is interactable and has the id of the source registered then try to find and remove all meshes
+        if (config.scene_objects[i].settings.interactable && config.scene_objects[i].settings.interactable_ids.indexOf(mesh_id) != -1) {
+            for (var j = 0; j < config.scene_objects[i].settings.interactable_ids.length; j++) {
+                var id = config.scene_objects[i].settings.interactable_ids[j];
+                var mesh = scene.getMeshByID(id);
+                if (mesh) {
+                    mesh.dispose();
+                }
+                else {
+                    console.log('No mesh found for id: ', id);
+                }
+            }
+            break;
+        }
+    }
+}
+
+/**
+    Simple way to add an inventory item.
+    @param string item_id The unique id of the item being added.
+    @param int quantity Defaults to 1 if not provided.
+*/
+function addItemToInventory(item_id, quantity){
+    if (typeof quantity == 'undefined'){
+        quantity = 1;
+    }
+
+    if (!config.inventory[item_id]) {
+        config.inventory[item_id] = 0;
+    }
+
+    config.inventory[item_id] += quantity;
+}
+
+/**
+    Check if the player has an item in their inventory.
+    @param string item_id The unique ID of the item. 
+    @param int quantity The number to check that the player has. This defaults to 1 if not provided.
+    @return bool
+*/
+function checkItemInInventory(item_id, quantity) {
+    if (typeof quantity == 'undefined') {
+        quantity = 1;
+    }
+
+    if (!config.inventory[item_id]) {
+        config.inventory[item_id] = 0;
+    }
+
+    console.log('checking for ', item_id, config.inventory[item_id]);
+
+    return parseInt(config.inventory[item_id]) >= quantity;
 }
 
 /**
@@ -468,9 +682,6 @@ function createScene(canvas, engine) {
                 alert('Mouse over!');
             }));
     });*/
-        
-    var radio_music = new BABYLON.Sound('radio_music', 'assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
-    }, { loop: false, autoplay: false });
 
     // Once we have a radio
     //radio_music.attachToMesh(radio);
@@ -531,7 +742,9 @@ function main() {
 
     engine.displayLoadingUI();
 
-    var scene = createScene(canvas, engine);
+    scene = createScene(canvas, engine);
+
+    //var ui = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('ui');
 
     window.addEventListener("resize", function () {
         engine.resize();
