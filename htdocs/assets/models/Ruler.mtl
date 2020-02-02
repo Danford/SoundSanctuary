@@ -1,20 +1,12 @@
-newmtl SK_Mannequin1SG
-illum 4
-Kd 0.22 0.22 0.22
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-Ks 0.20 0.20 0.20
-Ns 18.00
-newmtl SK_Mannequin1SG1
-illum 4
-Kd 0.72 0.72 0.72
-Ka 0.20 0.20 0.20
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl initialShadingGroup
-illum 4
-Kd 0.50 0.50 0.50
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl Boards.002
+Ns 7.843137
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.778175 0.184716
+Ks 1.000000 0.957353 0.359532
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2

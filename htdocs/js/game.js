@@ -68,7 +68,7 @@ var config = {
         },
         {
             file: 'stoolBarSquare.obj',
-            position: new BABYLON.Vector3(-50, 0, 380),
+            position: new BABYLON.Vector3(-50, -5, 380),
             scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
             rotation: new BABYLON.Vector3.Zero(),
             settings: {}
@@ -154,7 +154,7 @@ var config = {
             scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
             settings: {
-                nudge: new BABYLON.Vector3(-20, -5, 5), // Adjust position by a small amount
+                nudge: new BABYLON.Vector3(-20, -3, 0), // Adjust position by a small amount
                 interactable: true,
                 interaction_callback: function () {
                     // This gets called when this instance gets clicked on.
@@ -290,7 +290,20 @@ var config = {
              rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
              settings: {}
          },
-
+         { // Alec model
+             file: 'RollingPin.obj',
+             position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+             settings: {}
+         },
+         {
+             file: 'cap_electr.obj',
+             position: new BABYLON.Vector3(0, 0, 380), // Set to zero since it automatically positions itself
+             scale: new BABYLON.Vector3(2, 2, 2),  // Set to 1s to use native scale
+             rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+             settings: {}
+         },
     ]
 };
 
