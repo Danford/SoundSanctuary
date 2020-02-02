@@ -161,7 +161,86 @@ var config = {
                         alert('Stab all the things');
                     }
                 }
-            }
+            },
+             { // Alec model
+                 file: 'amp.obj',
+                 position: new BABYLON.Vector3(0, 0, 100), // Set to zero since it automatically positions itself
+                 scale: new BABYLON.Vector3(0.1, 0.1, 0.1),  // Set to 1s to use native scale
+                 rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                 settings: {
+                     interactable: true,
+                     interaction_callback: function () {
+                         // This gets called when this instance gets clicked on.
+                         alert('Amped up');
+                     }
+                 }
+             },
+            { // Alec model
+                file: 'battery.obj',
+                position: new BABYLON.Vector3(0, 0, 200), // Set to zero since it automatically positions itself
+                scale: new BABYLON.Vector3(0.5, 0.5, 0.5),  // Set to 1s to use native scale
+                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                settings: {
+                    interactable: true,
+                    interaction_callback: function () {
+                        // This gets called when this instance gets clicked on.
+                        alert('Power up');
+                    }
+                }
+            },
+            { // Alec model
+                file: 'BrokenRadio.obj',
+                position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+                scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                settings: {
+                    interactable: true,
+                    interaction_callback: function () {
+                        // This gets called when this instance gets clicked on.
+                        alert('Dancing is forbidden');
+                    }
+                }
+            },
+            { // Alec model
+                file: 'Ruler.obj',
+                position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+                scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+                rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                settings: {
+                    interactable: true,
+                    interaction_callback: function () {
+                        // This gets called when this instance gets clicked on.
+                        alert('What measures up?');
+                    }
+                }
+            },
+             { // Alec model
+                 file: 'Speaker.obj',
+                 position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+                 scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+                 rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                 settings: {
+                     nudge: new BABYLON.Vector3(0, 5, 0),
+                     interactable: true,
+                     interaction_callback: function () {
+                         // This gets called when this instance gets clicked on.
+                         alert('Loud noises!');
+                     }
+                 }
+             },
+              { // Alec model
+                  file: 'Tape.obj',
+                  position: new BABYLON.Vector3.Zero(), // Set to zero since it automatically positions itself
+                  scale: new BABYLON.Vector3(1, 1, 1),  // Set to 1s to use native scale
+                  rotation: new BABYLON.Vector3.Zero(), // Set to zero to not apply any rotation
+                  settings: {
+                      interactable: true,
+                      interaction_callback: function () {
+                          // This gets called when this instance gets clicked on.
+                          alert('If it moves and it\'s not supposed to');
+                      }
+                  }
+              }
 
     ]
 };
