@@ -4,9 +4,63 @@
 
 /// Storage for settings
 var config = {
+    // Height of the character in units
     character_height: 180,
-    characer_width: 60
+
+    // Width of the character in units
+    characer_width: 60,
+
+    // List of objects to load and place in the scene
+    scene_objects: [
+        {
+            file: 'televisionModern.obj',
+            position: new BABYLON.Vector3(560, 80, 250),
+            scale: new BABYLON.Vector3(250.0, 250.0, 250.0),
+            rotation: new BABYLON.Vector3(0.0, 20.4, 0.0),
+            settings: {}
+        },
+        {
+            file : 'trashcan.obj',
+            position: new BABYLON.Vector3(-170, 0, 140),
+            scale: new BABYLON.Vector3(200.0, 200.0, 200.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'kitchenStoveElectric.obj',
+            position: new BABYLON.Vector3(-325, 0, 540),
+            scale: new BABYLON.Vector3(280.0, 260.0, 260.0),
+            rotation: new BABYLON.Vector3.Zero(),
+            settings: {}
+        },
+        {
+            file: 'kitchenFridgeLarge.obj',
+            position: new BABYLON.Vector3(-560, 0, 120),
+            scale: new BABYLON.Vector3(260.0, 260.0, 260.0),
+            rotation: new BABYLON.Vector3(0.0, -20.4, 0.0),
+            settings: {}
+        }
+    ]
 };
+
+/**
+    Walk through a list of scene objects and init each one.
+    @param Babylon.Scene scene The scene to add the model to.
+    @param object Config The configuration for this instance of the model.
+*/
+function createSceneObject(scene, objectConfig) {
+    BABYLON.SceneLoader.ImportMesh(null, "/assets/models/", objectConfig.file, scene, function (meshes, particleSystems, skeletons) {
+        for (var i = 0; i < meshes.length; i++) {
+            if (!objectConfig.settings.noCollisionChecking){
+                meshes[i].checkCollisions = true;
+            }
+
+            meshes[i].rotation = objectConfig.rotation;
+            meshes[i].position = objectConfig.position;
+            meshes[i].scaling = objectConfig.scale;
+        }
+    });
+}
 
  /**
 	Init the scene and assets for render.
@@ -43,34 +97,36 @@ function createScene(canvas, engine) {
 	var light4 = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0, 30, -10), new BABYLON.Vector3(0, -1, 0), Math.PI / 3, 2, scene);
 	var light5 = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, 1, 0), scene);
 
-	// Add and manipulate meshes in the scene
-	/*var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2 }, scene);
-	sphere.position = new BABYLON.Vector3(0, 1, 0); // Sit on ground
-
-	var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6, updatable: false, subdivisions: 4 }, scene);*/
-
+    // Load area geometry
     BABYLON.SceneLoader.ImportMesh(null, "/assets/models/", "GameJamRoom_parted.obj", scene, function (meshes, particleSystems, skeletons) {
         for (var i = 0; i < meshes.length; i++) {
             meshes[i].checkCollisions = true;
         }
     });
 
-        BABYLON.SceneLoader.ImportMesh("", "/assets/models/", "Knife.obj", scene, function(newMeshes) {
-            var root = new BABYLON.Mesh('Name', scene);
-            newMeshes[0].parent = root;
-            
+    // Load scene objects
+    if (config.scene_objects.length) {
+        for (var i = 0; i < config.scene_objects.length; i++) {
+            createSceneObject(scene, config.scene_objects[i]);
+        }
+    }
 
-            newMeshes[0].enablePointerMoveEvents = true;
+    // Load interactive objects
+    BABYLON.SceneLoader.ImportMesh("", "/assets/models/", "Knife.obj", scene, function(newMeshes) {
+        var root = new BABYLON.Mesh('Name', scene);
+        newMeshes[0].parent = root;
+
+        newMeshes[0].enablePointerMoveEvents = true;
           
-            root.actionManager = new BABYLON.ActionManager(scene);
-            root.actionManager.isRecursive = true;
+        root.actionManager = new BABYLON.ActionManager(scene);
+        root.actionManager.isRecursive = true;
 
-            root.actionManager.registerAction(new BABYLON.ExecuteCodeAction(
-                { trigger: BABYLON.ActionManager.OnPickTrigger },
-                function() {
-                    alert('Mouse over!');
-                }));
-        });
+        root.actionManager.registerAction(new BABYLON.ExecuteCodeAction(
+            { trigger: BABYLON.ActionManager.OnPickTrigger },
+            function() {
+                alert('Mouse over!');
+            }));
+    });
         
     var radio_music = new BABYLON.Sound('radio_music', '/assets/music/Lobo_Loco_-_02_-_Traveling_to_Lousiana_-_Soft_Delay_ID_1174.mp3', scene, function () {
     }, { loop: false, autoplay: false });
